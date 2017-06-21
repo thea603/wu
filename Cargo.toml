@@ -4,3 +4,8 @@ version = "0.1.0"
 authors = ["Simontaosim <xsqfeather@gmail.com>"]
 
 [dependencies]
+
+rocket = "0.2.8"
+rocket_codegen = "0.2.8"
+bson = "0.8.0"
+mongodb = "0.3.0"
