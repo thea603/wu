@@ -1,7 +1,7 @@
 pub use bson::Bson;
 pub use mongodb::{Client, ThreadedClient};
 pub use mongodb::db::ThreadedDatabase;
-pub fn testone() {
+pub fn testone() -> String {
     let client = Client::connect("localhost", 27017)
         .expect("Failed to initialize standalone client.");
 
@@ -21,13 +21,14 @@ pub fn testone() {
     let item = cursor.next();
 
     // cursor.next() returns an Option<Result<Document>>
-    
+    let mut ptitle = "".to_string();
     match item {
-        Some(Ok(doc)) => match doc.get("title") {
-            Some(&Bson::String(ref title)) => println!("{}", title),
+        Some(Ok(doc)) => match doc.get("_id") {
+            Some(&Bson::ObjectId(ref _id)) => ptitle = ptitle+&(_id.to_hex()),
             _ => panic!("Expected title to be a string!"),
         },
         Some(Err(_)) => panic!("Failed to get next from server!"),
         None => panic!("Server returned no results!"),
     }
+    ptitle
 }

@@ -1,5 +1,4 @@
-extern crate self;
-
+pub use super::super::db::test;
 pub fn hello() -> String {
-    "こんにちは".to_string()
+    test::testone()
 }
