@@ -3,11 +3,15 @@
 
 extern crate rocket;
 extern crate wuligege;
+extern crate json;
+
+use wuligege::user::User;
+use rocket::response::content;
+
 
 #[get("/")]
-fn index() ->  String {
-
-    wuligege::japanese::greetings::hello()
+fn index() -> content::JSON<String>  {
+    content::JSON(User::all())
 }
 
 #[get("/")]
@@ -28,6 +32,7 @@ fn hello() -> String {
 fn world() -> &'static str {  // <- request handler
     "Hello, world!"
 }
+
 
 
 
