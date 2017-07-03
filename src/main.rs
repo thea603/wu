@@ -11,7 +11,8 @@ use rocket::response::content;
 
 #[get("/")]
 fn index() -> content::JSON<String>  {
-    content::JSON(User::all())
+    let user = User::new("simon".to_string(),"123666".to_string());
+    content::JSON(user.to_json())
 }
 
 #[get("/")]

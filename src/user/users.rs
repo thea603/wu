@@ -1,7 +1,12 @@
 pub use bson;
+use bson::spec::ElementType::ObjectId;
 pub use super::User;
 pub use serde_json;
 
+
+// trait User {
+//     fn to_json(&self) -> String;
+// }
 
 impl User {
     pub fn all() -> String {
@@ -9,7 +14,6 @@ impl User {
             id: "12345".to_string(),
             username: "Emma".to_string(),
             password: "awef".to_string(),
-            own: [1,2,3,4,5,6,7]
         };
 
         // Convert the Point to a packed JSON string. To convert it to
@@ -27,7 +31,31 @@ impl User {
            serialized
 
     }
-}
-pub fn hello() -> String {
-    "こんにちは".to_string()
+    pub fn new(uname:String, upass:String)->User{
+        let user = User {
+            id: "null".to_string(),
+            username: uname,
+            password: upass
+        };
+        user
+    }
+
+    pub fn new()-> User(){
+        let user = User {
+            id: "null".to_string(),
+            username: "null".to_string(),
+            password: "null".to_string(),
+        };
+        user
+    }
+
+    pub fn save(&self) -> i32{
+        -1
+    }
+
+    pub fn to_json(&self)-> String{
+        let serialized = serde_json::to_string(&self).unwrap();
+        serialized
+    }
+
 }
